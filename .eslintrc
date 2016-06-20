@@ -1,0 +1,14 @@
+{
+  "env": {
+    "browser": true,
+    "jquery": true
+  },
+  "globals": {
+    "angular": true,
+  },
+  'rules': {
+    semi: ["error", "always"],          // 必须使用分号结尾
+    quotes: ["off", "double"],          // 字符串引号不做单引号和双引号的限制
+    eqeqeq: ["error", "smart"],         // 对于判断相等，采用smart的方式
+  }
+}

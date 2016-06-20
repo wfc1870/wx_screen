@@ -1,0 +1,27 @@
+.wrapbg:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: url(../img/bs-docs.png) repeat center center;
+  opacity: .4;
+}
+.wrapbg{
+  background: url(../img/bg_lossy.jpg) center 0 no-repeat;
+  position: relative;
+  width: 100%;
+  min-width: 1014px;
+    /* min-height: 768px; */
+  height: 768px;
+  overflow: hidden;
+}
+/*--滚动条--*/
+::-webkit-scrollbar{ width:0px; height:0px; background-color:#000;}
+::-webkit-scrollbar:hover{ background-color:#000; }
+::-webkit-resizer{}
+::-webkit-scrollbar-thumb{ -webkit-border-radius:1px; background-color:#000; height:1px; }
+::-webkit-scrollbar-thumb:hover{ background-color: #000;}
+::-webkit-scrollbar-thumb:active{ background-color:#000;}

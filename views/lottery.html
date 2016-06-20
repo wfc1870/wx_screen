@@ -4,15 +4,17 @@
   <meta charset="UTF-8">
   <title>抽奖</title>
   <link href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/theme.css" media="screen" title="no title" charset="utf-8">
   <link rel="stylesheet" href="../css/lottery.css">
 </head>
 <body>
 <div class="wrapbg">
+</div>
+<div class="bingo-wrap">
   <div class="container">
     <div class="header">
       <div class="row">
         <div class="col-md-3 title">
-          <span>hantuo</span>
           <small><a href="wall.html">微信墙</a> <a href="shake.html">摇一摇</a> <a href="lottery.html">抽奖</a></small>
         </div>
         <div class="col-md-7 hudong">
@@ -23,6 +25,14 @@
         </div>
       </div>
     </div>
+    <section>
+      <div class="row">
+        <div class="col-md-4 bingo-btn">
+          <em></em>
+          现场抽奖
+        </div>
+      </div>
+    </section>
     <section class="row">
       <section class="col-md-8">
         <section class="bingo">
@@ -33,7 +43,7 @@
 
           <div class="action">
             <button class="start btn-warning btn btn-lg" id="startBtn">开始抽奖</button>
-            <button class="end btn-warning btn btn-lg" id="endBtn">停止</button>
+            <button class="end btn-warning btn btn-lg noshow" id="endBtn">停止</button>
           </div>
         </section>
       </section>
@@ -56,9 +66,9 @@
       </ul>
     </section>
   </div>
+<!-- <script src="js/libs/jquery.js" charset="utf-8"></script> -->
 </div>
-<script src="js/libs/jquery.js" charset="utf-8"></script>
-<!-- <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script> -->
+<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="../js/lottery.js"></script>
 </body>
 </html>

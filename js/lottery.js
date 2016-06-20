@@ -44,19 +44,7 @@ var Bingo = function (dataSource) {
   };
 };
 //数据人员代码
-var User = function () {
-  var _arr = null;
-
-  var _getArr = (function () {
-    $.ajax({
-      type: "GET",
-      url: "../data.json",
-      success: function (data) {
-        _arr = data;
-        console.log(_arr);
-      }
-    })
-  })();
+var User = function (_arr) {
 
   $.each(_arr, function (i, e) {
     e.id = i;
@@ -87,7 +75,7 @@ var User = function () {
       var guys = _getFromStorage('award') || [];
       var guy = null;
       $.each(guys, function (i, e) {
-        if (e.id == id) {
+        if (e.id === id) {
           guy = e;
           return;
         }
@@ -100,7 +88,7 @@ var User = function () {
     removeLuckGuy: function (id) {
       var guys = _getFromStorage('award') || [];
       $.each(guys, function (i, e) {
-        if (e && e.id == id) {
+        if (e && e.id === id) {
           guys.splice(i, 1);
           return;
         }
@@ -126,49 +114,69 @@ var User = function () {
     total: function () {
       return _arr.length;
     }
-  }
+  };
 };
 var Lottery = function(){
-  var _$startBtn = $("#startBtn"),
-    _$endBtn = $("#endBtn"),
-    _$awards = $(".list-unstyled"),
-    _$resetBtn = $("#resetBtn");
+  var _$startBtn = $('#startBtn'),
+    _$endBtn = $('#endBtn'),
+    _$awards = $('.result .list-unstyled'),
+    _$users = $('.users .list-unstyled'),
+    _$resetBtn = $('#resetBtn');
   return {
     init: function () {
       this.bindBtn();
+      this.getData();
+      //初始化执行一次
+    },
+    getData: function () {
+      var self = this;
+      $.ajax({
+        type: 'GET',
+        url: '../data.json',
+        success: function (data) {
+          user = new User(data);
+          bingo = new Bingo(user);
+          self.loadAwards();
+        }
+      });
     },
     //绑定事件
     bindBtn: function () {
       var self = this;
       _$startBtn.on('click',function(){
+        $(this).toggleClass('noshow');
+        $(_$endBtn).toggleClass('noshow');
         bingo.start();
       });
       _$endBtn.on('click',function(){
+        $(this).toggleClass('noshow');
+        $(_$startBtn).toggleClass('noshow');
         bingo.end();
         self.loadAwards();
       });
       _$resetBtn.on('click',function(){
         bingo.reset();
         self.loadAwards();
-      })
+      });
     },
     //渲染参与者头像
     drawguy: function (name, url) {
-      var $lottery_guy = $("#lottery_guy");
-      $lottery_guy.find(".nickname").text(name);
-      $lottery_guy.find("img").attr("src", url);
+      var $lotteryGuy = $('#lottery_guy');
+      $lotteryGuy.find('.nickname').text(name);
+      $lotteryGuy.find('img').attr('src', url);
     },
     //渲染中奖者信息
     loadAwards: function () {
       _$awards.html('');
+      _$users.html('');
       $.each(user.getLuckGuys(), function (index, element) {
-        _$awards.append($('<li>').append('<div class="row"><div class="name col-md-10">' + element.nickname + '</div><div class="col-md-2"><a href="#" data-id="' + element.id + '"> <i class="fa fa-remove"> </div></i></a>'));
+        _$awards.append($('<li>').append('<div class="row"><div class="name col-md-12">' + element.nickname + '</div><div class="col-md-2"><a href="#" data-id="' + element.id + '"> <i class="fa fa-remove"> </div></i></a>'));
       });
+      $.each(user.all(), function (index, element) {
+        _$users.append($('<li>').append('<img src="' + element.avatar + '" height="15px"/><span class="name">' + element.nickname + '</span><a href="#" data-id="' + index + '"> <i class="fa fa-remove"> </i></a>'));
+    });
     }
-  }
+  };
 };
-var lottery = new Lottery(),
-  user = new User(),
-  bingo = new Bingo(user);
+var lottery = new Lottery();
 lottery.init();
-
