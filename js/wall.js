@@ -1,14 +1,6 @@
 /**
  * Created by sunhongjian on 16-6-15.
  */
-var GETURL = "http://10.6.28.135:10519/business-service-activity/activity/tgh/participators",
-    GETPERSONURL = "http://10.6.28.135:10501/business-service-core/traffic/info";
-//url参数获取
-function getQueryString(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-    var r = location.search.substr(1).match(reg);
-    if (r != null) return unescape(decodeURI(r[2])); return null;
-}
 (function() {
     var viewFullScreen = document.getElementById("view-fullscreen");
     if (viewFullScreen) {

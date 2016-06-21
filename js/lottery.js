@@ -130,15 +130,20 @@ var Lottery = function(){
     },
     getData: function () {
       var self = this;
-      $.ajax({
-        type: 'GET',
-        url: '../data.json',
-        success: function (data) {
+      getActivityInfo(function(data){
+          console.log(data);
           user = new User(data);
           bingo = new Bingo(user);
           self.loadAwards();
-        }
       });
+/*      $.ajax({
+        type: "GET",
+        url: GETURL,
+        data: {activityId:actId,prized:5,type:2},
+        success: function (data) {
+  
+        }
+      });*/
     },
     //绑定事件
     bindBtn: function () {
