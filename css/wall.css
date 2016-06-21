@@ -19,7 +19,7 @@
 ::-webkit-scrollbar-thumb:active{ background-color:#000;}
 
 .wrapper{
-  width: 910px;
+  width: 935px;
   height: auto;
   margin: 0 auto;
   position: relative;
@@ -99,8 +99,9 @@
 }
 
 .heads-list {
-  width: 910px;
-  height: 520px;
+  width: 935px;
+  height: 460px;
+  overflow-y: auto;
   position: relative;
 }
 
@@ -301,12 +302,12 @@
 #view-fullscreen{
   position: fixed;
   bottom: 20px;
-  left: 200px;
+  left: 50px;
   background-image: url("../img/fullbtn.png");
-  width: 100px;
-  height: 100px;
+  width: 30px;
+  height: 30px;
   background-repeat: no-repeat;
-  background-size: 100px auto;
+  background-size: 30px auto;
   cursor: pointer;
   z-index: 9999;
 }

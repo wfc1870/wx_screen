@@ -9,6 +9,9 @@ a i {
 .noshow {
   display: none;
 }
+.btn-lg{
+  width: 106px;
+}
 .bingo, .result {
   height: 450px;
   /*border: 1px solid #ddd;*/

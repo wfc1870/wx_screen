@@ -29,22 +29,22 @@ var Bingo = function (dataSource) {
         url: GETBINGOURL,
         data: {
           activityId: actId,
-          prizeLevel: 1,      //获奖等级
+          prizeLevel: 1, //获奖等级
           count: lottery.cqnum
         },
-        success: function(data){
+        success: function (data) {
           var _id = data;
-          if(data.prized == null){
-            lottery.drawguy('','../img/avatar/default.png');
+          if (data.prized == null) {
+            lottery.drawguy('', '../img/avatar/default.png');
             lottery.endGame = true;
           }
-          $.each(data.prized,function(i,item){
+          $.each(data.prized, function (i, item) {
             lottery.removeDrawguy();
             var lucyNumber = dataSource.matchId(item);
             var luckyGuy = dataSource.get(lucyNumber);
             dataSource.addLuckyGuy(luckyGuy);
             dataSource.remove(lucyNumber);
-            if(i === data.prized.length-1){
+            if (i === data.prized.length - 1) {
               lottery.drawguy(luckyGuy.nickname, luckyGuy.avatar);
             }
           });
@@ -86,9 +86,9 @@ var User = function (_arr) {
   }
 
   return {
-    matchId: function(id){
-      for(var i=0; i<_arr.length; i++){
-        if(id === _arr[i].trafficId){
+    matchId: function (id) {
+      for (var i = 0; i < _arr.length; i++) {
+        if (id === _arr[i].trafficId) {
           return i;
         }
       }
@@ -181,7 +181,7 @@ var Lottery = function () {
     bindBtn: function () {
       var self = this;
       _$startBtn.on('click', function () {
-        if(!self.endGame){
+        if (!self.endGame) {
           $(this).toggleClass('noshow');
           $(_$endBtn).toggleClass('noshow');
           bingo.start();
@@ -196,14 +196,14 @@ var Lottery = function () {
         bingo.reset();
         self.loadAwards();
       });
-      _$cqBtns.on('click',function(){
+      _$cqBtns.on('click', function () {
         var _id = $(this).val();
         $('#cq_num').text(_id);
         self.cqnum = _id;
       });
     },
     //渲染参与者头像
-    removeDrawguy: function(){
+    removeDrawguy: function () {
       var $lotteryGuy = $('#lottery_guy');
       $lotteryGuy.find('.nickname').text('');
       $lotteryGuy.find('img').attr('src', '');
@@ -219,8 +219,8 @@ var Lottery = function () {
       _$users.html('');
       console.log(user.getLuckGuys());
       $.each(user.getLuckGuys(), function (index, element) {
-        if(element)
-        _$awards.append($('<li>').append('<div class="row"><div class="name col-md-12">' + element.nickname  + '</div><div class="col-md-2"><a href="#" data-id="' + element.id + '"> <i class="fa fa-remove"> </div></i></a>'));
+        if (element)
+          _$awards.append($('<li>').append('<div class="row"><div class="name col-md-12">' + element.nickname + '</div><div class="col-md-2"><a href="#" data-id="' + element.id + '"> <i class="fa fa-remove"> </div></i></a>'));
       });
       $.each(user.all(), function (index, element) {
         _$users.append($('<li>').append('<img src="' + element.avatar + '" height="15px"/><span class="name">' + element.nickname + '</span><a href="#" data-id="' + index + '"> <i class="fa fa-remove"> </i></a>'));

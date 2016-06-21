@@ -25,3 +25,40 @@
 ::-webkit-scrollbar-thumb{ -webkit-border-radius:1px; background-color:#000; height:1px; }
 ::-webkit-scrollbar-thumb:hover{ background-color: #000;}
 ::-webkit-scrollbar-thumb:active{ background-color:#000;}
+
+/*全屏*/
+#view-fullscreen {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    background-image: url("../img/fullbtn.png");
+    width: 30px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-size: 30px auto;
+    cursor: pointer;
+    z-index: 9999;
+}
+
+.activity-btn-group{
+  overflow: hidden;
+}
+.activity-btn-group div{
+  float:left;
+  margin-right: 30px;
+  cursor: pointer;
+  color: #fff;
+}
+.activity-btn-group div em{
+  display:block;
+  width: 30px;
+  height: 30px;
+  background-repeat: no-repeat;
+  background-size: 30px auto;
+}
+.activity-btn-group div.choujiang em{
+  background-image: url('../img/bingobtn.png');
+}
+.activity-btn-group div.qiandao em{
+  background-image: url('../img/qiandaobtn.png');
+}
