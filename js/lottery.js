@@ -29,7 +29,7 @@ var Bingo = function (dataSource) {
         url: GETBINGOURL,
         data: {
           activityId: actId,
-          prizeLevel: 1, //获奖等级
+          prizeLevel: lottery.cqjxnum, //获奖等级
           count: lottery.cqnum
         },
         success: function (data) {
@@ -98,6 +98,7 @@ var User = function (_arr) {
     },
     addLuckyGuy: function (guy) {
       var guys = _getFromStorage('award') || [];
+      guy.prize = lottery.cqjxtext;
       guys.push(guy);
       _setByStorage('award', guys);
     },
@@ -152,10 +153,13 @@ var Lottery = function () {
     _$awards = $('.result .list-unstyled'),
     _$users = $('.users .list-unstyled'),
     _$cqBtns = $('.cqrs').find('li'),
+    _$cqjxBtns = $('.cqjx').find('li'),
     _$resetBtn = $('#resetBtn');
   return {
     endGame: false,
-    cqnum: 1,
+    cqnum: 1,//一次抽取人数
+    cqjxnum: '',
+    cqjxtext: '',
     init: function () {
       this.bindBtn();
       this.getData();
@@ -163,6 +167,37 @@ var Lottery = function () {
     },
     getData: function () {
       var self = this;
+      $.ajax({
+        type: "GET",
+        url: GETACTIVITYURL,
+        data: {id: actId},
+        success: function(data){
+          data = data.activity.prizes;
+          $.each(data, function (i, item) {
+            var leveltext = '';
+            switch (item.level) {
+            case 0:
+              leveltext = '特等奖';
+              break;
+            case 1:
+              leveltext = '一等奖';
+              break;
+            case 2:
+              leveltext = '二等奖';
+              break;
+            case 3:
+              leveltext = '三等奖';
+              break;
+            case 4:
+              leveltext = '四等奖';
+              break;
+            default:
+              leveltext = '需求贡献奖';
+            }
+            $(".cqjx").find('ul').append('<li value='+item.level+'><a href="javascript:;">'+leveltext+'</a></li>');
+          });
+        }
+      });
       getActivityInfo(function (data) {
         user = new User(data);
         bingo = new Bingo(user);
@@ -201,6 +236,14 @@ var Lottery = function () {
         $('#cq_num').text(_id);
         self.cqnum = _id;
       });
+      $(document).on('click','.cqjx li', function () {
+        var _id = $(this).val();
+        var _text = $(this).find('a').text();
+        console.log(_id);
+        $('#cqjx_num').text(_text);
+        self.cqjxtext = _text;
+        self.cqjxnum = _id;
+      });
     },
     //渲染参与者头像
     removeDrawguy: function () {
@@ -220,7 +263,7 @@ var Lottery = function () {
       console.log(user.getLuckGuys());
       $.each(user.getLuckGuys(), function (index, element) {
         if (element)
-          _$awards.append($('<li>').append('<div class="row"><div class="name col-md-12">' + element.nickname + '</div><div class="col-md-2"><a href="#" data-id="' + element.id + '"> <i class="fa fa-remove"> </div></i></a>'));
+          _$awards.append($('<li>').append('<div class="row"><div class="name col-md-7">' + element.nickname + '</div><div class="col-md-5 star-style"> '+element.prize +'</div>'));
       });
       $.each(user.all(), function (index, element) {
         _$users.append($('<li>').append('<img src="' + element.avatar + '" height="15px"/><span class="name">' + element.nickname + '</span><a href="#" data-id="' + index + '"> <i class="fa fa-remove"> </i></a>'));
