@@ -62,7 +62,7 @@ var User = function (_arr) {
     window.localStorage.setItem(key, JSON.stringify(val));
   }
 
-  return{
+  return {
     clearLuckyGuy: function () {
       _setByStorage('award', []);
     },
@@ -116,7 +116,7 @@ var User = function (_arr) {
     }
   };
 };
-var Lottery = function(){
+var Lottery = function () {
   var _$startBtn = $('#startBtn'),
     _$endBtn = $('#endBtn'),
     _$awards = $('.result .list-unstyled'),
@@ -130,36 +130,36 @@ var Lottery = function(){
     },
     getData: function () {
       var self = this;
-      getActivityInfo(function(data){
-          console.log(data);
-          user = new User(data);
-          bingo = new Bingo(user);
-          self.loadAwards();
+      getActivityInfo(function (data) {
+        console.log(data);
+        user = new User(data);
+        bingo = new Bingo(user);
+        self.loadAwards();
       });
-/*      $.ajax({
-        type: "GET",
-        url: GETURL,
-        data: {activityId:actId,prized:5,type:2},
-        success: function (data) {
-  
-        }
-      });*/
+      /*      $.ajax({
+              type: "GET",
+              url: GETURL,
+              data: {activityId:actId,prized:5,type:2},
+              success: function (data) {
+
+              }
+            });*/
     },
     //绑定事件
     bindBtn: function () {
       var self = this;
-      _$startBtn.on('click',function(){
+      _$startBtn.on('click', function () {
         $(this).toggleClass('noshow');
         $(_$endBtn).toggleClass('noshow');
         bingo.start();
       });
-      _$endBtn.on('click',function(){
+      _$endBtn.on('click', function () {
         $(this).toggleClass('noshow');
         $(_$startBtn).toggleClass('noshow');
         bingo.end();
         self.loadAwards();
       });
-      _$resetBtn.on('click',function(){
+      _$resetBtn.on('click', function () {
         bingo.reset();
         self.loadAwards();
       });
@@ -179,7 +179,7 @@ var Lottery = function(){
       });
       $.each(user.all(), function (index, element) {
         _$users.append($('<li>').append('<img src="' + element.avatar + '" height="15px"/><span class="name">' + element.nickname + '</span><a href="#" data-id="' + index + '"> <i class="fa fa-remove"> </i></a>'));
-    });
+      });
     }
   };
 };

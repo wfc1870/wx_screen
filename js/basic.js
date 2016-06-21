@@ -9,20 +9,26 @@ function getQueryString(name) {
 }
 
 var actId = getQueryString('activityId');
+
 function getActivityInfo(callback) {
   $.ajax({
     type: "GET",
     url: GETURL,
-    data: {activityId: actId, prized: 5, type: 2},
+    data: {
+      activityId: actId,
+      prized: 5,
+      type: 2
+    },
     success: function (data) {
       var len = data.participators.length;
       var json = data.participators;
-      getActivityPersons(json, len, function(arr){
+      getActivityPersons(json, len, function (arr) {
         callback(arr);
       });
     }
   });
 }
+
 function getActivityPersons(json, len, callback) {
   var arr = [];
   for (var i = 0; i < len; i++) {
@@ -30,16 +36,20 @@ function getActivityPersons(json, len, callback) {
     $.ajax({
       type: "GET",
       url: GETPERSONURL,
-      data: {id: id},
+      data: {
+        id: id
+      },
       success: function (data) {
         var data = data.traffic;
-        if(data) {
-          arr.push({nickname: data.nickname, avatar: data.avatar});
-        }
-        else{
+        if (data) {
+          arr.push({
+            nickname: data.nickname,
+            avatar: data.avatar
+          });
+        } else {
           len--;
         }
-        if(arr.length === len){
+        if (arr.length === len) {
           callback(arr);
         }
       },
