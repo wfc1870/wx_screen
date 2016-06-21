@@ -3,6 +3,9 @@
 a i {
   color: white;
 }
+.btn:focus {
+  border: none;
+}
 .noshow {
   display: none;
 }
@@ -112,4 +115,9 @@ a i {
 .users li a i {
   font-size: 12px;
   color: white;
+}
+.cqrs{
+  position: absolute;
+  right: 180px;
+  top: 375px
 }

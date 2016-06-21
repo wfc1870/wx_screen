@@ -1,4 +1,7 @@
+//参与活动人员列表信息
 var GETURL = "http://10.6.28.135:10519/business-service-activity/activity/tgh/participators",
+    GETBINGOURL = "http://10.6.28.135:10519/business-service-activity/activity/tgh/winner",
+//参与活动人员详细信息
   GETPERSONURL = "http://10.6.28.135:10501/business-service-core/traffic/info";
 //url参数获取
 function getQueryString(name) {
@@ -43,6 +46,7 @@ function getActivityPersons(json, len, callback) {
         var data = data.traffic;
         if (data) {
           arr.push({
+            trafficId: data.id,
             nickname: data.nickname,
             avatar: data.avatar
           });

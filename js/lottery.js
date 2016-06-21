@@ -22,13 +22,36 @@ var Bingo = function (dataSource) {
     randit: function () {
       clearTimeout(timer);
       timer = null;
+      // var lucyNumber = Math.round(Math.random() * dataSource.total() + .5) - 1;
+      //从后台拉取中奖id
+      $.ajax({
+        type: "POST",
+        url: GETBINGOURL,
+        data: {
+          activityId: actId,
+          prizeLevel: 1,      //获奖等级
+          count: lottery.cqnum
+        },
+        success: function(data){
+          var _id = data;
+          if(data.prized == null){
+            lottery.drawguy('','../img/avatar/default.png');
+            lottery.endGame = true;
+          }
+          $.each(data.prized,function(i,item){
+            lottery.removeDrawguy();
+            var lucyNumber = dataSource.matchId(item);
+            var luckyGuy = dataSource.get(lucyNumber);
+            dataSource.addLuckyGuy(luckyGuy);
+            dataSource.remove(lucyNumber);
+            if(i === data.prized.length-1){
+              lottery.drawguy(luckyGuy.nickname, luckyGuy.avatar);
+            }
+          });
+          lottery.loadAwards();
+        }
+      });
 
-      var lucyNumber = Math.round(Math.random() * dataSource.total() + .5) - 1;
-      var luckyGuy = dataSource.get(lucyNumber);
-      lottery.drawguy(luckyGuy.nickname, luckyGuy.avatar);
-
-      dataSource.addLuckyGuy(luckyGuy);
-      dataSource.remove(lucyNumber);
     },
     remove: function (id) {
       var guy = dataSource.getLuckGuy(id);
@@ -36,9 +59,9 @@ var Bingo = function (dataSource) {
       dataSource.add(guy);
     },
     reset: function () {
-      $.each(dataSource.getLuckGuys(), function (i, e) {
-        dataSource.add(e);
-      });
+      // $.each(dataSource.getLuckGuys(), function (i, e) {
+      //   dataSource.add(e);
+      // });
       dataSource.clearLuckyGuy();
     }
   };
@@ -63,6 +86,13 @@ var User = function (_arr) {
   }
 
   return {
+    matchId: function(id){
+      for(var i=0; i<_arr.length; i++){
+        if(id === _arr[i].trafficId){
+          return i;
+        }
+      }
+    },
     clearLuckyGuy: function () {
       _setByStorage('award', []);
     },
@@ -121,8 +151,11 @@ var Lottery = function () {
     _$endBtn = $('#endBtn'),
     _$awards = $('.result .list-unstyled'),
     _$users = $('.users .list-unstyled'),
+    _$cqBtns = $('.cqrs').find('li'),
     _$resetBtn = $('#resetBtn');
   return {
+    endGame: false,
+    cqnum: 1,
     init: function () {
       this.bindBtn();
       this.getData();
@@ -131,7 +164,6 @@ var Lottery = function () {
     getData: function () {
       var self = this;
       getActivityInfo(function (data) {
-        console.log(data);
         user = new User(data);
         bingo = new Bingo(user);
         self.loadAwards();
@@ -149,22 +181,33 @@ var Lottery = function () {
     bindBtn: function () {
       var self = this;
       _$startBtn.on('click', function () {
-        $(this).toggleClass('noshow');
-        $(_$endBtn).toggleClass('noshow');
-        bingo.start();
+        if(!self.endGame){
+          $(this).toggleClass('noshow');
+          $(_$endBtn).toggleClass('noshow');
+          bingo.start();
+        }
       });
       _$endBtn.on('click', function () {
         $(this).toggleClass('noshow');
         $(_$startBtn).toggleClass('noshow');
         bingo.end();
-        self.loadAwards();
       });
       _$resetBtn.on('click', function () {
         bingo.reset();
         self.loadAwards();
       });
+      _$cqBtns.on('click',function(){
+        var _id = $(this).val();
+        $('#cq_num').text(_id);
+        self.cqnum = _id;
+      });
     },
     //渲染参与者头像
+    removeDrawguy: function(){
+      var $lotteryGuy = $('#lottery_guy');
+      $lotteryGuy.find('.nickname').text('');
+      $lotteryGuy.find('img').attr('src', '');
+    },
     drawguy: function (name, url) {
       var $lotteryGuy = $('#lottery_guy');
       $lotteryGuy.find('.nickname').text(name);
@@ -174,8 +217,10 @@ var Lottery = function () {
     loadAwards: function () {
       _$awards.html('');
       _$users.html('');
+      console.log(user.getLuckGuys());
       $.each(user.getLuckGuys(), function (index, element) {
-        _$awards.append($('<li>').append('<div class="row"><div class="name col-md-12">' + element.nickname + '</div><div class="col-md-2"><a href="#" data-id="' + element.id + '"> <i class="fa fa-remove"> </div></i></a>'));
+        if(element)
+        _$awards.append($('<li>').append('<div class="row"><div class="name col-md-12">' + element.nickname  + '</div><div class="col-md-2"><a href="#" data-id="' + element.id + '"> <i class="fa fa-remove"> </div></i></a>'));
       });
       $.each(user.all(), function (index, element) {
         _$users.append($('<li>').append('<img src="' + element.avatar + '" height="15px"/><span class="name">' + element.nickname + '</span><a href="#" data-id="' + index + '"> <i class="fa fa-remove"> </i></a>'));
