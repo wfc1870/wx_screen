@@ -167,37 +167,32 @@ var Lottery = function () {
     },
     getData: function () {
       var self = this;
-      $.ajax({
-        type: "GET",
-        url: GETACTIVITYURL,
-        data: {id: actId},
-        success: function(data){
-          data = data.activity.prizes;
-          $.each(data, function (i, item) {
-            var leveltext = '';
-            switch (item.level) {
-            case 0:
-              leveltext = '特等奖';
-              break;
-            case 1:
-              leveltext = '一等奖';
-              break;
-            case 2:
-              leveltext = '二等奖';
-              break;
-            case 3:
-              leveltext = '三等奖';
-              break;
-            case 4:
-              leveltext = '四等奖';
-              break;
-            default:
-              leveltext = '需求贡献奖';
-            }
-            $(".cqjx").find('ul').append('<li value='+item.level+'><a href="javascript:;">'+leveltext+'</a></li>');
-          });
-        }
+      getForOpen(function(data){
+        var data = data.activity.prizes;
+        $.each(data, function (i, item) {
+          var leveltext = '';
+          switch (item.level) {
+          case 0:
+            leveltext = '特等奖';
+            break;
+          case 1:
+            leveltext = '一等奖';
+            break;
+          case 2:
+            leveltext = '二等奖';
+            break;
+          case 3:
+            leveltext = '三等奖';
+            break;
+          case 4:
+            leveltext = '四等奖';
+            break;
+          default:
+            leveltext = '需求贡献奖';
+          }
+          $(".cqjx").find('ul').append('<li value='+item.level+'><a href="javascript:;">'+leveltext+'</a></li>');
       });
+    });
       getActivityInfo(function (data) {
         user = new User(data);
         bingo = new Bingo(user);

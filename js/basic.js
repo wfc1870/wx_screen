@@ -64,7 +64,16 @@ function getActivityInfo(callback) {
     }
   });
 }
-
+function getForOpen(callback){
+  $.ajax({
+    type: "GET",
+    url: GETACTIVITYURL,
+    data: {id: actId},
+    success: function(data){
+      callback(data);
+    }
+  });
+}
 function getActivityPersons(json, len, callback) {
   var arr = [];
   for (var i = 0; i < len; i++) {
@@ -100,4 +109,9 @@ function getActivityPersons(json, len, callback) {
 $(".activity-btn-group").find('div').click(function(){
   var rel = $(this).attr("rel");
   window.location.href = rel+'.html?activityId='+actId;
+});
+$(function(){
+  getForOpen(function(data){
+    $(".wrapbg").css("background-image","url("+data.activity.prizeBackgroundUrl+")");
+  });
 });
