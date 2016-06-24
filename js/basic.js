@@ -1,9 +1,10 @@
 //参与活动人员列表信息
 var GETURL = "http://10.6.28.135:10519/business-service-activity/activity/tgh/participators",
-  GETACTIVITYURL = "http://10.6.28.135:10519/business-service-activity/activity/tgh/for_open",
+  GETACTIVITYURL = "http://10.6.28.135:10519/business-service-activity/activity/tgh",
   GETBINGOURL = "http://10.6.28.135:10519/business-service-activity/activity/tgh/winner",
   //参与活动人员详细信息
-  GETPERSONURL = "http://10.6.28.135:10501/business-service-core/traffic/info";
+  GETPERSONURL = "http://10.6.28.135:10501/business-service-core/traffic/info",
+  token = "3db43376-220f-49cb-ae11-9b54663cdc53";
 //url参数获取
 function getQueryString(name) {
   var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
@@ -64,11 +65,12 @@ function getActivityInfo(callback) {
     }
   });
 }
+//获取推广会活动
 function getForOpen(callback){
   $.ajax({
     type: "GET",
     url: GETACTIVITYURL,
-    data: {id: actId},
+    data: {token: token, id: actId},
     success: function(data){
       callback(data);
     }
@@ -112,6 +114,7 @@ $(".activity-btn-group").find('div').click(function(){
 });
 $(function(){
   getForOpen(function(data){
-    $(".wrapbg").css("background-image","url("+data.activity.prizeBackgroundUrl+")");
+    var _bg = data.activity.prizeBackgroundUrl;
+    $("body").css("background-image","url("+_bg+")");
   });
 });

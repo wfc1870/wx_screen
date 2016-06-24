@@ -1,3 +1,6 @@
+body{
+  background-position: center top;
+}
 .wrapbg:after {
   content: '';
   display: block;
@@ -9,15 +12,14 @@
   background: url(../img/bs-docs.png) repeat center center;
   opacity: .4;
 }
-.wrapbg{
+/*.wrapbg{
   background: url(../img/bg_lossy.jpg) center 0 no-repeat;
   position: relative;
   width: 100%;
   min-width: 1014px;
-    /* min-height: 768px; */
   height: 768px;
   overflow: hidden;
-}
+}*/
 /*--滚动条--*/
 ::-webkit-scrollbar{ width:0px; height:0px; background-color:#000;}
 ::-webkit-scrollbar:hover{ background-color:#000; }
