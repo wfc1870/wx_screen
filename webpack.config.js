@@ -22,11 +22,17 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: ''
   },
+  eslint: {
+    formatter: require('eslint-friendly-formatter')
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve('src', 'index.tpl.html'),
       inject: 'body',
       filename: 'index.html'
+    }),
+    new webpack.ProvidePlugin({
+      $: "jquery"
     })
   ],
   module: {
