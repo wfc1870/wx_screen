@@ -64,7 +64,7 @@
         url: GETURL,
         data: {
           activityId: actId,
-          prized: 5,
+          prized: 999,
           type: 2
         },
         success: function (data) {
