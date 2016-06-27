@@ -5,13 +5,6 @@ var GETURL = "http://10.6.28.135:10519/business-service-activity/activity/tgh/pa
   //参与活动人员详细信息
   GETPERSONURL = "http://10.6.28.135:10501/business-service-core/traffic/info",
   token = "3db43376-220f-49cb-ae11-9b54663cdc53";
-//url参数获取
-function getQueryString(name) {
-  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-  var r = location.search.substr(1).match(reg);
-  if (r != null) return unescape(decodeURI(r[2]));
-  return null;
-}
 //全屏
 (function () {
   var viewFullScreen = document.getElementById("view-fullscreen");
@@ -53,7 +46,7 @@ function getActivityInfo(callback) {
     url: GETURL,
     data: {
       activityId: actId,
-      prized: 5,
+      prized: 999,
       type: 2
     },
     success: function (data) {
