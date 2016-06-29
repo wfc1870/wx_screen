@@ -38,6 +38,7 @@ var GETURL = "http://10.6.28.135:10519/business-service-activity/activity/tgh/pa
     }, false);
   }
 })();
+//获取活动id
 var actId = getQueryString('activityId');
 
 function getActivityInfo(callback) {
@@ -108,6 +109,10 @@ $(".activity-btn-group").find('div').click(function(){
 $(function(){
   getForOpen(function(data){
     var _bg = data.activity.prizeBackgroundUrl;
-    $("body").css("background-image","url("+_bg+")");
+    $("body").css({
+      "background": "url("+_bg+") center",
+      "backgroundSize": "100% 100%"
+  });
+    $("body").attr("style",'background: url('+_bg+') center; background-size: 100% 100%');
   });
 });

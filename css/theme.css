@@ -1,5 +1,9 @@
 body{
   background-position: center top;
+  min-height: 768px;
+  height: 100%;
+  overflow: auto;
+  
 }
 .wrapbg:after {
   content: '';
