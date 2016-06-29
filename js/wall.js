@@ -11,7 +11,7 @@
       ACTIVITY_NAME: "activityId",
       MAX_COUNT: 1000, //最大展示人数
       SPEED: 1000, //滚动速度(ms)
-      normalPic: "img/avatar/a1.jpg"
+      normalPic: "../img/avatar/a1.jpg"
     };
     for (var i in opts) {
       this.opts[i] = opts[i];
@@ -31,7 +31,6 @@
       }, self.opts.SPEED);
     },
     getPersonData: function () {
-      console.log(this.per);
       //获取当前活动id用作请求参数
       var self = this;
       var actId = getQueryString(this.opts.ACTIVITY_NAME);
@@ -53,6 +52,9 @@
                 self._personAdd(avatar, name);
               }
             }
+            else{
+
+            }
           },
           error: function () {
 
@@ -68,6 +70,7 @@
           type: 2
         },
         success: function (data) {
+          console.log(self.per);
           if (data.participators[self.per]) {
             var _id = data.participators[self.per].trafficId;
           }
