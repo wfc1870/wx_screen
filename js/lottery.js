@@ -36,7 +36,7 @@ var Bingo = function (dataSource) {
           var _id = data;
           if (data.prized == null) {
             lottery.drawguy('', '../img/avatar/default.png');
-            lottery.endGame = true;
+            lottery.endGame = false;
           }
           $.each(data.prized, function (i, item) {
             lottery.removeDrawguy();
@@ -155,6 +155,7 @@ var Lottery = function () {
     _$cqBtns = $('.cqrs').find('li'),
     _$cqjxBtns = $('.cqjx').find('li'),
     _$resetBtn = $('#resetBtn');
+
   function _renderPrize() {
     getForOpen(function (data) {
       var data = data.activity.prizes;
@@ -214,10 +215,14 @@ var Lottery = function () {
     bindBtn: function () {
       var self = this;
       _$startBtn.on('click', function () {
-        if (!self.endGame) {
-          $(this).toggleClass('noshow');
-          $(_$endBtn).toggleClass('noshow');
-          bingo.start();
+        if ($("#cqjx_num").text() === '抽取奖项') {
+          layer.alert('请选择抽取奖项');
+        } else {
+          if (!self.endGame) {
+            $(this).toggleClass('noshow');
+            $(_$endBtn).toggleClass('noshow');
+            bingo.start();
+          }
         }
       });
       _$endBtn.on('click', function () {
