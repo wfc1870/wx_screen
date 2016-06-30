@@ -377,19 +377,20 @@
 .header{
   height: 140px;
   overflow: hidden;
+  position: relative;
 }
 .headMid{
   float: left;
   width: 700px;
   height: 100px;
-  margin-top: 30px;
-  margin-left: 10px;
   border-radius: 5% ;
   overflow: hidden;
   border-top: 1px solid #fff;
   border-bottom: 1px solid #fff;
- 
-
+  position: absolute;
+  top: 30px;
+  left: 10px;
+  z-index: 2;
 }
 h2{
   width: 145px;
@@ -407,25 +408,33 @@ h2{
 }
 .num-t em{
   color: blue;
+  font-family: Arial;
 }
 .zuo{
-  width: 550px;
+  width: 540px;
   height: 100px;
-  border-right:1px solid #fff; 
-  color:red;
+  border-right:1px solid #fff;
+  color:#358d36;
   font-weight: bold;
   font-size: 30px;
   line-height: 100px;
   text-align: center;
   float: left;
-  background:#fff;
-  opacity: 0.5;
+}
+.headMid-mask{
+  position: absolute;
+  top: 30px;
+  left: 10px;
+  width: 700px;
+  height: 100px;
+  background: #fff;
+  opacity: 0.2;
 }
 .zj{
-  width: 4;
+  width: 1px;
   height:98px;
   border: 1px solid #fff;
-  margin-top: 1px; 
+  margin-top: 1px;
   float: left;
 }
 .you{
@@ -435,8 +444,6 @@ h2{
   font-size: 10px;
   text-align: center;
   float: left;
-  background:#fff;
-  opacity: 0.5;
 }
 #headRight{
       width: 100px;

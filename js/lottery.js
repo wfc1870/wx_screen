@@ -33,20 +33,25 @@ var Bingo = function (dataSource) {
           count: lottery.cqnum
         },
         success: function (data) {
+          console.log(data);
+          if(data.msg === '目标数量不足！' || data.msg === '抽奖数量超过可抽奖数量！'){
+            layer.alert('奖品已抽完');
+          }
           var _id = data;
           if (data.prized == null) {
             lottery.drawguy('', '../img/avatar/default.png');
             lottery.endGame = false;
           }
           $.each(data.prized, function (i, item) {
-            lottery.removeDrawguy();
-            var lucyNumber = dataSource.matchId(item);
-            var luckyGuy = dataSource.get(lucyNumber);
-            dataSource.addLuckyGuy(luckyGuy);
-            dataSource.remove(lucyNumber);
-            if (i === data.prized.length - 1) {
-              lottery.drawguy(luckyGuy.nickname, luckyGuy.avatar);
-            }
+              lottery.removeDrawguy();
+              dataSource.matchId(item, function(lucyNumber){
+                var luckyGuy = dataSource.get(lucyNumber);
+                dataSource.addLuckyGuy(luckyGuy);
+                dataSource.remove(lucyNumber);
+                if (i === data.prized.length - 1) {
+                  lottery.drawguy(luckyGuy.nickname, luckyGuy.avatar);
+                }
+              });
           });
           lottery.loadAwards();
         }
@@ -86,17 +91,20 @@ var User = function (_arr) {
   }
 
   return {
-    matchId: function (id) {
+    matchId: function (id , callback) {
+      console.log(_arr);
+      console.log(id);
       for (var i = 0; i < _arr.length; i++) {
-        if (id === _arr[i].trafficId) {
-          return i;
-        }
+          if (id == _arr[i].trafficId) {
+            callback(i);
+          }
       }
     },
     clearLuckyGuy: function () {
       _setByStorage('award', []);
     },
     addLuckyGuy: function (guy) {
+      console.log(guy);
       var guys = _getFromStorage('award') || [];
       guy.prize = lottery.cqjxtext;
       guys.push(guy);
@@ -242,7 +250,6 @@ var Lottery = function () {
       $(document).on('click', '.cqjx li', function () {
         var _id = $(this).val();
         var _text = $(this).find('a').text();
-        console.log(_id);
         $('#cqjx_num').text(_text);
         self.cqjxtext = _text;
         self.cqjxnum = _id;
@@ -263,7 +270,6 @@ var Lottery = function () {
     loadAwards: function () {
       _$awards.html('');
       _$users.html('');
-      console.log(user.getLuckGuys());
       $.each(user.getLuckGuys(), function (index, element) {
         if (element)
           _$awards.append($('<li>').append('<div class="row"><div class="name col-md-7">' + element.nickname + '</div><div class="col-md-5 star-style"> ' + element.prize + '</div>'));

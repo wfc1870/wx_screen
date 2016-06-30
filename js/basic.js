@@ -48,7 +48,7 @@ function getActivityInfo(callback) {
     data: {
       activityId: actId,
       prized: 999,
-      type: 2
+      type: 3
     },
     success: function (data) {
       var len = data.participators.length;
