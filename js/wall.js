@@ -74,8 +74,10 @@
           if (data.participators[self.per]) {
             var _id = data.participators[self.per].trafficId;
           }
+          if(data.participators.length > self.personNum){
+            getPersonDate(_id);
+          }
           self.perLength = data.participators.length;
-          getPersonDate(_id);
         },
         error: function () {
 
