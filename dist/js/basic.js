@@ -109,11 +109,9 @@ $(".activity-btn-group").find('div').click(function(){
 $(function(){
   getForOpen(function(data){
     var _bg = data.activity.prizeBackgroundUrl;
-    $("body").css({
-      "background": "url("+_bg+") center",
-      "backgroundSize": "100% 100%"
-     });
-    $("body").attr("style",'background: url('+_bg+') center; background-size: 100% 100%');
-    $(".loading_con").addClass("hide");
+    $(".backgroung-img").attr("style",'background-image: url('+_bg+')');
+    setTimeout(function(){
+      $(".loading_con").addClass("hide");
+    },500)   
   });
 });
