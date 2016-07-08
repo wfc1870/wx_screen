@@ -112,7 +112,8 @@ $(function(){
     $("body").css({
       "background": "url("+_bg+") center",
       "backgroundSize": "100% 100%"
-  });
+     });
     $("body").attr("style",'background: url('+_bg+') center; background-size: 100% 100%');
+    $(".loading_con").addClass("hide");
   });
 });
