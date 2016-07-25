@@ -19,7 +19,7 @@
 ::-webkit-scrollbar-thumb:active{ background-color:#000;}
 
 .wrapper{
-  width: 935px;
+  width: 960px;
   height: auto;
   margin: 0 auto;
   position: relative;
@@ -74,25 +74,29 @@
 }
 
 .fl-layer {
-  position: absolute;
-  top: 135px;
-  left: 0;
-  z-index: 1000;
-}
-
-/*--签到--*/
-.checkin-pop {
-  position: absolute;
-  z-index: 999;
+  width: 960px;
+  height: 470px;
+  position: relative;
 }
 
 .inner-checkin { /* height:555px; overflow:hidden;*/
 }
 
-.heads-list {
+.sign-view{
+  padding-left: 25px;
   width: 935px;
   height: 460px;
   min-height: 460px;
+  overflow: hidden;
+  position: relative;
+  background: rgba(0, 0, 0, .2);
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+}
+
+.heads-list {
   overflow-y: auto;
   position: relative;
 }

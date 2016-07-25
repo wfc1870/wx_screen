@@ -109,6 +109,7 @@ $(".activity-btn-group").find('div').click(function(){
 $(function(){
   getForOpen(function(data){
     var _bg = data.activity.prizeBackgroundUrl;
+    $(".blur div").attr("style",'background-image: url('+_bg+')');
     $(".backgroung-img").attr("style",'background-image: url('+_bg+')');
     setTimeout(function(){
       $(".loading_con").addClass("hide");
