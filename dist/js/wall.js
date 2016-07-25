@@ -10,7 +10,8 @@
     this.opts = {
       ACTIVITY_NAME: "activityId",
       MAX_COUNT: 1000, //最大展示人数
-      SPEED: 1000, //滚动速度(ms)
+      SPEED: 3000, //滚动速度(ms)
+      SHOW_SPEED: 10000,
       normalPic: "../img/avatar/a1.jpg"
     };
     for (var i in opts) {
@@ -23,44 +24,53 @@
     per: 0, //请求接口次数
     personNum: 0,
     perLength: 0,
-    listData: null,
+    trafficList: [],
     init: function () {
       var self = this;
-      var timer = setInterval(function () {
+      self.getPersonData();
+      var apiTimer = setInterval(function () {
         self.getPersonData();
       }, self.opts.SPEED);
+      var showTimer = setInterval(function () {
+        if(self.per < self.personNum) {
+          self.getTraffic();
+        }
+      }, self.opts.SHOW_SPEED);
+    },
+    getTraffic: function () {
+      var self = this;
+      console.log(self.per);
+      var id = self.trafficList[self.per];
+      $.ajax({
+        type: "GET",
+        url: GETPERSONURL,
+        data: {
+          id: id
+        },
+        success: function (data) {
+          self.per++;
+          if (data.traffic) {
+            self.personNum++;
+            var name = data.traffic.nickname ? data.traffic.nickname : "游客",
+              avatar = data.traffic.avatar ? data.traffic.avatar : self.opts.normalPic;
+            if (self.per < self.perLength) {
+              self._personAdd(avatar, name);
+            }
+          }
+          else{
+
+          }
+        },
+        error: function () {
+
+        }
+      });
     },
     getPersonData: function () {
       //获取当前活动id用作请求参数
       var self = this;
       var actId = getQueryString(this.opts.ACTIVITY_NAME);
       //获取用户成员具体信息
-      var getPersonDate = function (id) {
-        $.ajax({
-          type: "GET",
-          url: GETPERSONURL,
-          data: {
-            id: id
-          },
-          success: function (data) {
-            self.per++;
-            if (data.traffic) {
-              self.personNum++;
-              var name = data.traffic.nickname ? data.traffic.nickname : "游客",
-                avatar = data.traffic.avatar ? data.traffic.avatar : self.opts.normalPic;
-              if (self.per < self.perLength) {
-                self._personAdd(avatar, name);
-              }
-            }
-            else{
-
-            }
-          },
-          error: function () {
-
-          }
-        });
-      };
       $.ajax({
         type: "GET",
         url: GETURL,
@@ -71,13 +81,18 @@
         },
         success: function (data) {
           console.log(self.per);
-          if (data.participators[self.per]) {
-            var _id = data.participators[self.per].trafficId;
+          for(var i = self.personNum; i < data.participators.length; i++){
+            self.trafficList.push((data.participators[i].trafficId));
+            self.personNum++;
           }
-          if(data.participators.length > self.personNum){
-            getPersonDate(_id);
-          }
-          self.perLength = data.participators.length;
+          console.log(self.trafficList);
+          // if (data.participators[self.per]) {
+          //   var _id = data.participators[self.per].trafficId;
+          // }
+          // if(data.participators.length > self.personNum){
+          //   self.getTraffic(_id);
+          // }
+          // self.perLength = data.participators.length;
         },
         error: function () {
 
