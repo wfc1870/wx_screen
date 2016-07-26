@@ -1,9 +1,11 @@
 //参与活动人员列表信息
-var GETURL = "http://10.6.28.135:10519/business-service-activity/activity/tgh/participators",
+// var GETURL = "http://10.6.28.135:10519/business-service-activity/activity/tgh/participators",
+var GETURL = "http://mscrm.huntor.cn/bs-activity-a-t-p",
   GETACTIVITYURL = "http://10.6.28.135:10519/business-service-activity/activity/tgh",
   GETBINGOURL = "http://10.6.28.135:10519/business-service-activity/activity/tgh/winner",
   //参与活动人员详细信息
-  GETPERSONURL = "http://10.6.28.135:10501/business-service-core/traffic/info",
+  // GETPERSONURL = "http://10.6.28.135:10501/business-service-core/traffic/info",
+  GETPERSONURL = "http://mscrm.huntor.cn/bs-core-t-t";
   token = "3db43376-220f-49cb-ae11-9b54663cdc53";
 //全屏
 (function () {
@@ -107,12 +109,14 @@ $(".activity-btn-group").find('div').click(function(){
   window.location.href = rel+'.html?activityId='+actId;
 });
 $(function(){
-  getForOpen(function(data){
-    var _bg = data.activity.prizeBackgroundUrl;
-    $(".blur div").attr("style",'background-image: url('+_bg+')');
-    $(".backgroung-img").attr("style",'background-image: url('+_bg+')');
-    setTimeout(function(){
-      $(".loading_con").addClass("hide");
-    },500)   
-  });
+  // getForOpen(function(data){
+  //   var _bg = data.activity.prizeBackgroundUrl;
+  //   $(".blur div").attr("style",'background-image: url('+_bg+')');
+  //   $(".backgroung-img").attr("style",'background-image: url('+_bg+')');
+  //   setTimeout(function(){
+  //     $(".loading_con").addClass("hide");
+  //   },500);
+  // });
+  // 测试
+  $(".loading_con").addClass("hide");
 });

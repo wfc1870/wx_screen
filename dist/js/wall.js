@@ -11,7 +11,7 @@
       ACTIVITY_NAME: "activityId",
       MAX_COUNT: 1000, //最大展示人数
       SPEED: 3000, //滚动速度(ms)
-      SHOW_SPEED: 10000,
+      SHOW_SPEED: 100,
       normalPic: "../img/avatar/a1.jpg"
     };
     for (var i in opts) {
@@ -22,12 +22,13 @@
   //构造函数
   SignWall.prototype = {
     per: 0, //请求接口次数
-    personNum: 0,
+    personNum: 50,
     perLength: 0,
     trafficList: [],
     init: function () {
       var self = this;
       self.getPersonData();
+      self.holdScroll();
       var apiTimer = setInterval(function () {
         self.getPersonData();
       }, self.opts.SPEED);
@@ -37,34 +38,39 @@
         }
       }, self.opts.SHOW_SPEED);
     },
+    holdScroll: function () {
+      $(".heads-list ").scrollTop($(".heads-list").scrollHeight);
+    },
     getTraffic: function () {
       var self = this;
-      console.log(self.per);
-      var id = self.trafficList[self.per];
-      $.ajax({
-        type: "GET",
-        url: GETPERSONURL,
-        data: {
-          id: id
-        },
-        success: function (data) {
-          self.per++;
-          if (data.traffic) {
-            self.personNum++;
-            var name = data.traffic.nickname ? data.traffic.nickname : "游客",
-              avatar = data.traffic.avatar ? data.traffic.avatar : self.opts.normalPic;
-            if (self.per < self.perLength) {
-              self._personAdd(avatar, name);
-            }
-          }
-          else{
+      // console.log(self.per);
+      // var id = self.trafficList[self.per];
+      // $.ajax({
+      //   type: "GET",
+      //   url: GETPERSONURL,
+      //   data: {
+      //     id: id
+      //   },
+      //   success: function (data) {
+      //     self.per++;
+      //     if (data.traffic) {
+      //       self.personNum++;
+      //       var name = data.traffic.nickname ? data.traffic.nickname : "游客",
+      //         avatar = data.traffic.avatar ? data.traffic.avatar : self.opts.normalPic;
+      //       if (self.per < self.perLength) {
+      //         self._personAdd(avatar, name);
+      //       }
+      //     }
+      //     else{
 
-          }
-        },
-        error: function () {
+      //     }
+      //   },
+      //   error: function () {
 
-        }
-      });
+      //   }
+      // });
+      self.per++;
+      self._personAdd('../img/avatar/a1.jpg','小布'+self.per);
     },
     getPersonData: function () {
       //获取当前活动id用作请求参数
@@ -85,14 +91,6 @@
             self.trafficList.push((data.participators[i].trafficId));
             self.personNum++;
           }
-          console.log(self.trafficList);
-          // if (data.participators[self.per]) {
-          //   var _id = data.participators[self.per].trafficId;
-          // }
-          // if(data.participators.length > self.personNum){
-          //   self.getTraffic(_id);
-          // }
-          // self.perLength = data.participators.length;
         },
         error: function () {
 

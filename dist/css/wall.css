@@ -10,14 +10,6 @@
   visibility: hidden;
   line-height: 0;
 }
-/*--滚动条--*/
-::-webkit-scrollbar{ width:0px; height:0px; background-color:#000;}
-::-webkit-scrollbar:hover{ background-color:#000; }
-::-webkit-resizer{}
-::-webkit-scrollbar-thumb{ -webkit-border-radius:1px; background-color:#000; height:1px; }
-::-webkit-scrollbar-thumb:hover{ background-color: #000;}
-::-webkit-scrollbar-thumb:active{ background-color:#000;}
-
 .wrapper{
   width: 960px;
   height: auto;
@@ -85,8 +77,8 @@
 .sign-view{
   padding-left: 25px;
   width: 935px;
-  height: 460px;
-  min-height: 460px;
+  height: 520px;
+  min-height: 520px;
   overflow: hidden;
   position: relative;
   background: rgba(0, 0, 0, .2);
@@ -97,8 +89,9 @@
 }
 
 .heads-list {
-  overflow-y: auto;
+  overflow-y: scroll;
   position: relative;
+  height: 460px;
 }
 
 .heads-list li {
@@ -107,7 +100,7 @@
   width: 110px;
   height: 110px; /* padding:5px;*/
   margin-right: 23px;
-  margin-top: 23px;
+  margin-top: 13px;
   display: inline;
 }
 
@@ -380,22 +373,28 @@
 
 
 .header{
-  height: 140px;
   overflow: hidden;
   position: relative;
+  padding-top: 8px;
+  padding-left: 10px;
+  margin-bottom: 15px;
 }
-.headMid{
+.header .logo-box{
+  width: 120px;
+  height: 40px;
+  background-repeat: no-repeat;
+  background-size: 120px auto;
   float: left;
-  width: 700px;
-  height: 100px;
-  border-radius: 5% ;
-  overflow: hidden;
-  border-top: 1px solid #fff;
-  border-bottom: 1px solid #fff;
-  position: absolute;
-  top: 30px;
-  left: 10px;
-  z-index: 2;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+.header h1{
+  font-size: 40px;
+  font-weight: normal;
+  display: table-cell;
+  vertical-align: middle;
+  color: #FFF;
+  text-shadow: 0 1px 3px #000;
 }
 h2{
   width: 145px;
@@ -428,101 +427,34 @@ h2{
 }
 .headMid-mask{
   position: absolute;
-  top: 30px;
-  left: 10px;
-  width: 700px;
-  height: 100px;
+  top: 10px;
+  left: 0px;
+  width: 600px;
+  height: 50px;
   background: #fff;
   opacity: 0.2;
 }
-.zj{
-  width: 1px;
-  height:98px;
-  border: 1px solid #fff;
-  margin-top: 1px;
-  float: left;
+.middle-msg {
+  margin: 10px 0;
 }
-.you{
-  width: 147px;
-  height: 100px;
-  color:green;
-  font-size: 10px;
-  text-align: center;
-  float: left;
+.middle-msg .title{
+  display: inline-block;
+  font-size: 18px;
+  color: rgb(48,48,48);
+  color: #fff;
+  text-shadow: 1px 2px rgba(0,0,0,.2);
+  vertical-align: middle;
 }
-#headRight{
-      width: 100px;
-      height: 120px;
-      /*border: 1px solid red;*/
-      float: right;
-      perspective:1000px;
-      perspective-origin:center center;
-    }
-#box{
-    width: 20px;
-    height: 30px;
-    list-style: none;
-    position: relative;
-    margin-top: 30px;
-    -webkit-transform-style:preserve-3d;
-    /* perspective:1000px;
-    perspective-origin:center center; */
-    transform:rotateX(20deg) rotateY(20deg) rotateZ(0deg);
-    animation:move 5s linear infinite;
-
-  }
-@-webkit-keyframes move{
-    0%{
-      transform:rotate(0deg) scale3d(0.8,0.8,0.8);
-    }
-    40%{
-      transform:rotateX(20deg) rotateY(0deg) rotateZ(0deg) scale3d(0.6,0.6,0.6);
-    }
-    80%{
-      transform:rotateX(0deg) rotateY(280deg) rotateZ(0deg) scale3d(0.4,0.4,0.4);
-    }
-    100%{
-      transform:rotateX(0deg) rotateY(280deg) rotateZ(80deg) scale3d(0.4,0.4,0.4);
-    }
-  }
-  #box li{
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    text-align: center;
-    line-height: 20px;
-  }
-  #box li:nth-child(1){
-    background: #D390C4;
-    opacity: 0.5;
-    -webkit-transform:translateZ(50px);
-    -ms-transform:translateZ(50px);
-    -moz-transform:translateZ(50px);
-    -o-transform:translateZ(50px);
-      transform:translateZ(50px);
-  }
-  #box li:nth-child(2){
-    background: #358D36;
-    opacity: 0.5;
-    transform:translateZ(-50px);
-  }
-  #box li:nth-child(3){
-    background: #C9CA3C;
-    opacity: 0.5;
-    transform:rotateX(-90deg) translateZ(-50px) ;
-  }
-  #box li:nth-child(4){
-    background: #741961;
-    opacity: 0.5;
-    transform:rotateX(-90deg) translateZ(50px) ;
-  }
-  #box li:nth-child(5){
-    background: #3CB1BF;
-    opacity: 0.5;
-    transform: rotateY(-90deg) translateZ(-50px);
-  }
-  #box li:nth-child(6){
-    background:#D75A3F;
-    opacity: 0.5;
-    transform: rotateY(-90deg) translateZ(50px);
-  }
+.middle-msg em{
+  font-style: normal;
+  color: rgb(48,48,48);
+  color: #fff;
+  text-shadow: 1px 2px rgba(0,0,0,.4);
+  font-size: 24px;
+}
+.middle-msg .bg{
+  background: #000;
+  display: inline-block;
+  padding: 5px 20px;
+  border-radius: 5px;
+}

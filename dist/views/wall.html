@@ -15,42 +15,19 @@
   <div class="wrapbg">
     <div class="wrapper">
       <div class="header">
-        <div class="headLeft">
-          <!-- <h2>
-            微信大屏幕-签到
-          </h2>
-          <div class="num-t left">
-            <p><em class="messageTotal" id="messageTotal">0</em><span>人签到</span></p>
-          </div> -->
-        </div>
-        <div class="headMid">
-          <div class="zuo">
-            微信大屏幕官方展示
-          </div>
-          <div class="zj"></div>
-          <div class="you">
-            <h2>
-            微信大屏幕-签到
-          </h2>
-          <div class="num-t left">
-            <p><em class="messageTotal" id="messageTotal">0</em><span>人签到</span></p>
-          </div>
-          </div>
-        </div>
+        <div class="logo-box" style="background-image:url(http://www.huntor.cn/images/logo.png)"></div>
+        <h1>微信大屏幕展示</h1>
         <div class="headMid-mask"></div>
-        <div id="headRight">
-          <ul id="box">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
-        </div>
       </div>
       <div class="fl-layer checkin-pop">
         <div class="sign-view">
+          <div class="middle-msg">
+            <div class="title">签到墙: </div>
+              <div class="bg">
+                <em class="messageTotal" id="messageTotal">0</em>
+                <span>人签到</span>
+            </div>
+          </div>
           <ul class="heads-list clearfix">
             
           </ul>
@@ -79,7 +56,7 @@
   <script>
     $(function () {
       var test = SingletonTester.getInstance();
-    })
+    });
   </script>
 </body>
 
