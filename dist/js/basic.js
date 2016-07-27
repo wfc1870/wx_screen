@@ -1,6 +1,6 @@
 //参与活动人员列表信息
 // var GETURL = "http://10.6.28.135:10519/business-service-activity/activity/tgh/participators",
-var BASI_URL = "http://scrmoauth.nhw360.com",
+var BASI_URL = "http://http://mscrm.huntor.cn",
   GETURL = BASI_URL + "/bs-activity-a-t-p",
   // GETACTIVITYURL = "http://10.6.28.135:10519/business-service-activity/activity/tgh",
   GETACTIVITYURL = BASI_URL + "/bs-activity-a-t",
@@ -10,7 +10,7 @@ var BASI_URL = "http://scrmoauth.nhw360.com",
   // GETPERSONURL = "http://10.6.28.135:10501/business-service-core/traffic/info",
   GETPERSONURL = BASI_URL + "/bs-core-t-t";
 
-var token = "6b7d5785118ea2275bc6208f8d591588";
+var token = "3db43376-220f-49cb-ae11-9b54663cdc53";
 //全屏
 (function() {
   var viewFullScreen = document.getElementById("view-fullscreen");
