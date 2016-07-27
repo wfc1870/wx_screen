@@ -1,6 +1,6 @@
 //参与活动人员列表信息
 // var GETURL = "http://10.6.28.135:10519/business-service-activity/activity/tgh/participators",
-var BASI_URL = "scrmoauth.nhw360.com",
+var BASI_URL = "http://scrmoauth.nhw360.com",
   GETURL = BASI_URL + "/bs-activity-a-t-p",
   // GETACTIVITYURL = "http://10.6.28.135:10519/business-service-activity/activity/tgh",
   GETACTIVITYURL = BASI_URL + "/bs-activity-a-t",
