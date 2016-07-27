@@ -32,10 +32,10 @@ body{
 }
 .headMid-mask{
   position: absolute;
-  top: 10px;
+  top: 8px;
   left: 0px;
   width: 600px;
-  height: 50px;
+  height: 62px;
   background: #fff;
   opacity: 0.2;
 }
@@ -111,7 +111,7 @@ body{
   margin: auto auto;
 }
 .loading > div {
-  background-color: #67CF22;
+  background-color: #3498db;
   height: 100%;
   width: 6px;
   display: inline-block;

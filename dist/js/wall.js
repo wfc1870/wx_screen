@@ -33,7 +33,7 @@ var SingletonTester = (function () {
         self.getPersonData();
       }, self.opts.SPEED);
       var showTimer = setInterval(function () {
-        if (self.per < self.personNum) {
+        if (self.per < self.personNum ) {
           self.getTraffic();
         }
       }, self.opts.SHOW_SPEED);
@@ -45,6 +45,7 @@ var SingletonTester = (function () {
       var self = this;
       console.log(self.per);
       var id = self.trafficList[self.per];
+      self.per++;
       $.ajax({
         type: "GET",
         url: GETPERSONURL,
@@ -52,7 +53,6 @@ var SingletonTester = (function () {
           id: id
         }
       }).then(function (data) {
-        self.per++;
         if (data.traffic) {
           var name = data.traffic.nickname ? data.traffic.nickname : "游客",
             avatar = data.traffic.avatar ? data.traffic.avatar : self.opts.normalPic;
@@ -75,8 +75,8 @@ var SingletonTester = (function () {
         }
       }).then(function (data) {
         for (var i = self.personNum; i < data.participators.length; i++) {
-          self.trafficList.push((data.participators[i].trafficId));
           self.personNum++;
+          self.trafficList.push((data.participators[i].trafficId));
         }
       });
     },
