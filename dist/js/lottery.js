@@ -95,7 +95,7 @@ var User = function (_arr) {
       console.log(_arr);
       console.log(id);
       for (var i = 0; i < _arr.length; i++) {
-          if (id == _arr[i].trafficId) {
+          if (id === _arr[i].trafficId) {
             callback(i);
           }
       }

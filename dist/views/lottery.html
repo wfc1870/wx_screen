@@ -18,16 +18,9 @@
   <div class="bingo-wrap">
     <div class="container">
       <div class="header">
-        <div class="row">
-          <div class="col-md-3 title">
-          </div>
-          <div class="col-md-7 hudong">
-            <span></span>
-          </div>
-          <div class="col-md-2 powerby">
-
-          </div>
-        </div>
+        <div class="logo-box"></div>
+        <h1>微信大屏幕展示</h1>
+        <div class="headMid-mask"></div>
       </div>
       <section>
         <div class="row">
@@ -43,34 +36,36 @@
               <div class="nickname"></div>
               <img src="../img/avatar/default.png" />
             </div>
-            <div class="btn-group cqjx">
-              <div type="button" class="btn btn-info" id="cqjx_num">抽取奖项</div>
-              <div type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="caret"></span>
-                <span class="sr-only">Toggle Dropdown</span>
+            <div class="btn-container">
+              <div class="btn-group cqjx">
+                <div type="button" class="btn btn-info" id="cqjx_num">抽取奖项</div>
+                <div type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="caret"></span>
+                  <span class="sr-only">Toggle Dropdown</span>
+                </div>
+                <ul class="dropdown-menu">
+                </ul>
               </div>
-              <ul class="dropdown-menu">
-              </ul>
-            </div>
-            <div class="action">
-              <div class="color-btn" id="startBtn">
-                <span>开始抽奖</span>
+              <div class="action">
+                <div class="color-btn" id="startBtn">
+                  <span>开始抽奖</span>
+                </div>
+                <div class="color-btn noshow" id="endBtn">
+                  <span>停止</span>
+                </div>
               </div>
-              <div class="color-btn noshow" id="endBtn">
-                <span>停止</span>
+              <div class="btn-group cqrs">
+                <div type="button" class="btn btn-info">抽取人数 (<span id="cq_num">1</span>)</div>
+                <div type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="caret"></span>
+                  <span class="sr-only">Toggle Dropdown</span>
+                </div>
+                <ul class="dropdown-menu">
+                  <li value=1><a href="javascript:;">1</a></li>
+                  <li value=2><a href="javascript:;">2</a></li>
+                  <li value=5><a href="javascript:;">5</a></li>
+                </ul>
               </div>
-            </div>
-            <div class="btn-group cqrs">
-              <div type="button" class="btn btn-info">抽取人数 (<span id="cq_num">1</span>)</div>
-              <div type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="caret"></span>
-                <span class="sr-only">Toggle Dropdown</span>
-              </div>
-              <ul class="dropdown-menu">
-                <li value=1><a href="javascript:;">1</a></li>
-                <li value=2><a href="javascript:;">2</a></li>
-                <li value=5><a href="javascript:;">5</a></li>
-              </ul>
             </div>
           </section>
         </section>
@@ -92,15 +87,17 @@
         <ul class="list-inline list-unstyled">
         </ul>
       </section>
-      <div class="activity-btn-group">
-        <div class="qiandao" title="签到" rel='wall'>
-          <em></em>
-          <p>签到</p>
-        </div>
-        <div class="choujiang" title="抽奖" rel='lottery'>
-          <em></em>
-          <p>抽奖</p>
-        </div>
+    </div>
+  </div>
+  <div class="activity-btn-group">
+    <div class="div">
+      <div class="qiandao" title="签到" rel='wall'>
+        <em></em>
+        <p>签到</p>
+      </div>
+      <div class="choujiang" title="抽奖" rel='lottery'>
+        <em></em>
+        <p>抽奖</p>
       </div>
     </div>
   </div>
