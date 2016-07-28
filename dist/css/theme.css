@@ -169,30 +169,45 @@ body{
     cursor: pointer;
     z-index: 9998;
 }
+.foot-bar{
+  position: fixed;
+  bottom: 0px;
+  height: 65px;
+  width: 100%;
+  z-index: 100;
+}
+.foot-bar:hover .activity-btn-group{
+  bottom: 0;
+}
 .activity-btn-group{
   overflow: hidden;
   position: fixed;
-  bottom: 0px;
-  opacity: 0;
+  bottom: -50px;
+  opacity: 1;
   height: 50px;
   width: 100%;
-  background: rgba(0, 0, 0, 0.3);
-  /*-webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;*/
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.6);
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 .activity-btn-group .div{
   width: 960px;
   overflow: hidden;
   margin: 0 auto;
 }
-.activity-btn-group:hover{
-  opacity: 1;
-}
+
 .activity-btn-group .div div{
   float:left;
   margin-right: 30px;
   cursor: pointer;
   color: #fff;
+}
+.activity-btn-group .foot-btn{
+  opacity: 0.4;
+}
+.activity-btn-group .active {
+  opacity: 1;
 }
 .activity-btn-group div em{
   display:block;
