@@ -12,6 +12,7 @@ var SingletonTester = (function () {
       MAX_COUNT: 1000, //最大展示人数
       SPEED: 30000, //滚动速度(ms)
       SHOW_SPEED: 500,
+      SCROLL_HEIGHT: 460,
       normalPic: "../img/avatar/a1.jpg"
     };
     for (var i in opts) {
@@ -39,7 +40,8 @@ var SingletonTester = (function () {
       }, self.opts.SHOW_SPEED);
     },
     holdScroll: function () {
-      $(".heads-list ").scrollTop($(".heads-list").scrollHeight);
+      var self = this;
+      $(".heads-list-box").scrollTop($(".heads-list").height()-self.opts.SCROLL_HEIGHT);
     },
     getTraffic: function () {
       var self = this;
@@ -93,6 +95,7 @@ var SingletonTester = (function () {
         '</li>';
       $sign.append(_html);
       $messageTotal.text(_per);
+      this.holdScroll();
     }
   };
   //返回对象

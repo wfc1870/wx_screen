@@ -88,7 +88,7 @@
   z-index: 2;
 }
 
-.heads-list {
+.heads-list-box {
   overflow-y: scroll;
   position: relative;
   height: 460px;
