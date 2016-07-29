@@ -185,8 +185,6 @@ var Lottery = function () {
         case 4:
           leveltext = '四等奖';
           break;
-        default:
-          leveltext = '需求贡献奖';
         }
         $(".cqjx").find('ul').append('<li value=' + item.level + '><a href="javascript:;">' + leveltext + '</a></li>');
       });

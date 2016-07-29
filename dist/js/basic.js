@@ -120,10 +120,12 @@ $(function() {
   getForOpen(function(data) {
     var _bg = data.activity.prizeBackgroundUrl;
     var _logoUrl = data.activity.logoUrl;
+    var _name = data.activity.name;
     if (_bg) {
       $(".blur div").attr("style", 'background-image: url(' + _bg + ')');
       $(".backgroung-img").attr("style", 'background-image: url(' + _bg + ')');
     }
+    $("#tgh_name").text(_name);
     $(".logo-box").attr("style", 'background-image:url(' + _logoUrl + ')');
     setTimeout(function() {
       $(".loading_con").addClass("hide");
