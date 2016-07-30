@@ -228,6 +228,8 @@ var Lottery = function () {
             $(this).toggleClass('noshow');
             $(_$endBtn).toggleClass('noshow');
             bingo.start();
+          }else{
+            layer.alert('该奖项已抽完');
           }
         }
       });
